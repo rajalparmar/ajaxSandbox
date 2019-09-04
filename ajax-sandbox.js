@@ -24,4 +24,5 @@ function loadData() {
     }
     // SEND
     xmlHttpRequest.send();
+
 }
