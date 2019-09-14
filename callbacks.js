@@ -9,11 +9,18 @@ const posts = [
     },
 ];
 
-function createPost(post, displayPosts) {
-    setTimeout(function() {
-        posts.push(post);
-        displayPosts();
-    }, 2000);
+function createPost(post) {
+    return new Promise(function(resolve, reject) {
+        setTimeout(function() {
+            posts.push(post);
+            const error = false;
+            if(!error) {
+                resolve();
+            } else {
+                reject('Error: Something went wrong!');
+            }
+        }, 2000);
+    });
 }
 
 function displayPosts() {
@@ -29,5 +36,9 @@ function displayPosts() {
 createPost({
     title: 'Post Three',
     body: 'This is post three'
-}, displayPosts);
+})
+.then(displayPosts)
+.catch(function(errorMessage) {
+    console.log(errorMessage);
+});
 
